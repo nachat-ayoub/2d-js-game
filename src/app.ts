@@ -7,9 +7,13 @@ window.addEventListener("load", () => {
 
   const context = canvas.getContext("2d") as CanvasRenderingContext2D;
   const game = new Game(canvas.width, canvas.height);
+  let lastTime = 0;
 
-  function animate(deltaTime: number) {
-    game.render(context);
+  function animate(timeStamp: number) {
+    const deltaTime = timeStamp - lastTime;
+    lastTime = timeStamp;
+
+    game.render(context, deltaTime);
     requestAnimationFrame(animate);
   }
 
